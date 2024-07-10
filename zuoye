@@ -1,0 +1,29 @@
+#!/bin/bash
+#1
+if [ -f /home/test.sh ];then
+   echo "该文件存在"
+else
+   echo "该文件不存在"
+fi
+
+if [ -x /home/test.sh ];then
+   echo "该文件具有执行权限"
+else
+   echo "该文件没有执行权限"
+fi
+#2
+files=("//etc/rc.d/rc.local" "/etc/rc.d/init.d/functions" "/etc/inittab")
+for file in "${files[@]}"
+do
+       echo "#开头的行数: $file"
+    sed -n '/^#/p' $file | wc -l
+       echo "空白的行数: $file"
+    sed -n '/^\s*$/p' $file | wc -l
+done
+#3
+read -p "请输入数字:" num
+if [ $[$num%2] -eq 0 ];then
+   echo "是偶数"
+else
+   echo "是基数"
+fi
